@@ -4,30 +4,26 @@
 
   jobs:
     build:
+
       runs-on: ubuntu-latest
 
       steps:
         - uses: actions/checkout@v2
-
         - name: Set up Python 3.9
           uses: actions/setup-python@v2
           with:
-            python-version: '3.9'
-
+            python-version: 3.9
         - name: Install Poetry Action
           uses: snok/install-poetry@v1
           with:
             version: 1.1.10
             virtualenvs-in-project: true
-
         - name: Install dependencies
           run:
             make install
-
         -name: Test and coverage
           run:
             make coverage
-
         - name: Test & publish code coverage
           uses: paambaati/codeclimate-action@v3.0.0
           env:
